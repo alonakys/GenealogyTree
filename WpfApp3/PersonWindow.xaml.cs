@@ -136,7 +136,11 @@ namespace GenealogyTree
                 MessageBox.Show("Please enter a gender.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
+            if (PersonRepository.People.Any()&& _editingPerson.Parent==null)
+            {
+                MessageBox.Show("Please enter a parent.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             return true;
         }
 
