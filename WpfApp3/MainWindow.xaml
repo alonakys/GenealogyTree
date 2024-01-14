@@ -1,0 +1,19 @@
+﻿<Window x:Class="GenealogyTree.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Genealogy Tree" Height="700" Width="1700">
+    <Grid>
+        <!-- Tree display here -->
+        <TreeView x:Name="genealogyTreeView" HorizontalAlignment="Left" VerticalAlignment="Top" Height="600" Width="300" />
+
+        <!-- Buttons -->
+        <Button Content="Create Person" Click="CreatePerson_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"/>
+        <Button Content="Delete Person" Click="DeletePerson_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="213,0,0,10" RenderTransformOrigin="0.26,0.4"/>
+        <Button Content="Edit Person" Click="EditPerson_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="121,0,0,10"/>
+        <Button Content="Build Tree" Click="BuildTree_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="10,605,0,0"/>
+        <Canvas x:Name="genealogyCanvas" HorizontalAlignment="Left" Height="590" Margin="300,10,0,0" VerticalAlignment="Top" Width="1382"/>
+    </Grid>
+</Window>
