@@ -12,7 +12,7 @@ namespace GenealogyTree
 {
     public partial class Form1 : Form
     {
-        private const int NODE_HEIGHT = 300;
+        private const int NODE_HEIGHT = 80;
         private const int NODE_WIDTH = 120;
         private const int NODE_MARGIN_X = 50;
         private const int NODE_MARGIN_Y = 40;
