@@ -13,7 +13,6 @@ namespace GenealogyTree
         public string Gender { get; set; }
         public Person Parent { get; set; }
         public ObservableCollection<Person> Children { get; set; } = new ObservableCollection<Person>();
-
         
         public override string ToString()
         {

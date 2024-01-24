@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GenealogyTree
 {
@@ -14,7 +15,6 @@ namespace GenealogyTree
         public PersonWindow(Person person = null)
         {
             InitializeComponent();
-
             _originalPerson = person ?? new Person();
             _editingPerson = new Person
             {
@@ -27,13 +27,11 @@ namespace GenealogyTree
 
             DataContext = _editingPerson;
 
-            // Call PopulateParentComboBox after the UI components have been initialized
             Loaded += (sender, e) => PopulateParentComboBox();
         }
 
         private void PopulateParentComboBox()
         {
-            // Ensure PersonRepository is populated with data before calling this method
             if (PersonRepository.People.Any())
             {
                 parentComboBox.ItemsSource = PersonRepository.People
@@ -93,7 +91,6 @@ namespace GenealogyTree
                     _originalPerson.Parent = null;
                 }
 
-                // Add or edit the person in the repository
                 if (PersonRepository.PersonExists(_originalPerson.Id))
                 {
                     PersonRepository.EditPerson(_originalPerson, _originalPerson);
@@ -103,17 +100,11 @@ namespace GenealogyTree
                     PersonRepository.AddPerson(_originalPerson);
                 }
 
-                // Close the window
                 Close();
-            }
-            else
-            {
-                MessageBox.Show("Please correct the input fields.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private bool ValidateInput()
         {
-            // Перевірка імені та прізвища на наявність лише літер, апострофа та тире
             Regex nameRegex = new Regex("^[a-zA-Zа-яА-ЯґҐєЄіІїЇ'-]+$");
             if (string.IsNullOrWhiteSpace(_editingPerson.Name) || !nameRegex.IsMatch(_editingPerson.Name))
             {
@@ -125,22 +116,36 @@ namespace GenealogyTree
                 MessageBox.Show("Please enter a valid surname.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
             if (!Regex.IsMatch(_editingPerson.BirthDate.ToString("dd.MM.yyyy"), @"^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$"))
             {
                 MessageBox.Show("Please enter a valid date.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(_editingPerson.Gender))
+            if (_editingPerson.BirthDate.ToShortDateString() == "01.01.0001")
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show($"Maybe the date you entered is incorrect.\nDo you really want to save this proposed date: \"{_editingPerson.BirthDate.ToShortDateString()}\"?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.No)
+                {
+                    MessageBox.Show("Please enter date.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+            }
+                if (string.IsNullOrWhiteSpace(_editingPerson.Gender))
             {
                 MessageBox.Show("Please enter a gender.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (PersonRepository.People.Any()&& _editingPerson.Parent==null)
+            if (PersonRepository.People.Any() && _editingPerson.Parent == null)
             {
-                MessageBox.Show("Please enter a parent.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter a child.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+            if (_editingPerson.Parent != null && _editingPerson.Parent.Children.Count == 2 && (!_editingPerson.Parent.Children[0].Equals(_originalPerson) && !_editingPerson.Parent.Children[1].Equals(_originalPerson)))
+            {
+                MessageBox.Show("Please choose another child.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             return true;
         }
 
