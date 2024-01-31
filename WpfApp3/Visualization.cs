@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GenealogyTree
 {
-    public partial class Form1 : Form
+    public partial class Visualization : Form
     {
         private const int NODE_HEIGHT = 80;
         private const int NODE_WIDTH = 120;
@@ -19,7 +19,7 @@ namespace GenealogyTree
         private static Pen NODE_PEN = Pens.Gray;
         public List<SampleDataModel> _data;
         public TreeNodeModel<SampleDataModel> _tree;
-        public Form1(List<SampleDataModel> sampleTree)
+        public Visualization(List<SampleDataModel> sampleTree)
         {
             InitializeComponent();
 

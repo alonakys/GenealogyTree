@@ -58,7 +58,6 @@ namespace GenealogyTree
                 node.Height = node.Children.OrderByDescending(p => p.Height).First().Height;
             }
         }
-
         private static void CalculateInitialX(TreeNodeModel<T> node)
         {
             foreach (var child in node.Children)
@@ -149,7 +148,6 @@ namespace GenealogyTree
                 sibling = sibling.GetNextSibling();
             }
         }
-
         private static void CenterNodesBetween(TreeNodeModel<T> leftNode, TreeNodeModel<T> rightNode)
         {
             var leftIndex = leftNode.Parent.Children.IndexOf(rightNode);

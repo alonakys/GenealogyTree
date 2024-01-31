@@ -1,7 +1,7 @@
 ﻿
 namespace GenealogyTree
 {
-    partial class Form1
+    partial class Visualization
     {
         /// <summary>
         /// Required designer variable.
@@ -40,18 +40,18 @@ namespace GenealogyTree
             this.treePanel.Size = new System.Drawing.Size(1370, 700);
             this.treePanel.TabIndex = 0;
             // 
-            // Form1
+            // Visualization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoScrollMargin = new System.Drawing.Size(10000, 5000);
-            this.AutoScrollMinSize = new System.Drawing.Size(1300, 650);
+            this.AutoScrollMinSize = new System.Drawing.Size(1000, 500);
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1370, 701);
+            this.ClientSize = new System.Drawing.Size(1284, 661);
             this.Controls.Add(this.treePanel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Visualization";
+            this.Text = "Visualization";
             this.ResumeLayout(false);
 
         }

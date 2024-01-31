@@ -107,7 +107,7 @@ namespace GenealogyTree
         }
         private void BuildTree_Click(object sender, RoutedEventArgs e)
         {
-            Form1 winFormsWindow = new Form1(sampleTree);
+            Visualization winFormsWindow = new Visualization(sampleTree);
             winFormsWindow.Show();
         }
     }
