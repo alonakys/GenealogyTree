@@ -62,7 +62,8 @@ namespace GenealogyTree
 
         private TreeViewItem CreateTreeViewItem(Person person, ref List<SampleDataModel> sampleTree)
         {
-            TreeViewItem item = new TreeViewItem { Header = $"{person.Name} {person.Surname}, {person.BirthDate.ToShortDateString()}, {person.Gender}", Tag = person };
+            TreeViewItem item = new TreeViewItem { Header = $"{person.Name} {person.Surname}, {person.BirthDate.ToShortDateString()}, " +
+                $"{person.Gender}", Tag = person };
 
             if (person.Children != null && person.Children.Any())
             {
@@ -84,7 +85,8 @@ namespace GenealogyTree
             if (genealogyTreeView.SelectedItem != null && genealogyTreeView.SelectedItem is TreeViewItem selectedItem)
             {
                 Person selectedPerson = (Person)selectedItem.Tag;
-                MessageBoxResult result = System.Windows.MessageBox.Show($"Are you sure you want to delete {selectedPerson.Name} {selectedPerson.Surname} and their descendants?", 
+                MessageBoxResult result = System.Windows.MessageBox.Show($"Are you sure you want to delete {selectedPerson.Name} " +
+                    $"{selectedPerson.Surname} and their descendants?", 
                     "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -107,8 +109,15 @@ namespace GenealogyTree
         }
         private void BuildTree_Click(object sender, RoutedEventArgs e)
         {
-            Visualization winFormsWindow = new Visualization(sampleTree);
-            winFormsWindow.Show();
+            if (sampleTree == null || sampleTree.Count == 0)
+            {
+                System.Windows.MessageBox.Show("No data to build the tree.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                Visualization winFormsWindow = new Visualization(sampleTree);
+                winFormsWindow.Show();
+            }
         }
     }
 }

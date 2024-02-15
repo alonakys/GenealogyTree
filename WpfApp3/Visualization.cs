@@ -22,13 +22,12 @@ namespace GenealogyTree
         public Visualization(List<SampleDataModel> sampleTree)
         {
             InitializeComponent();
-
-            _data = sampleTree;
-            _tree = GetSampleTree(_data);
-            TreeHelpers<SampleDataModel>.CalculateNodePositions(_tree);
-            CalculateControlSize();
-            DoubleBuffered = true;
-            treePanel.Paint += treePanel_Paint;
+                _data = sampleTree;
+                _tree = GetSampleTree(_data);
+                TreeHelpers<SampleDataModel>.CalculateNodePositions(_tree);
+                CalculateControlSize();
+                DoubleBuffered = true;
+                treePanel.Paint += treePanel_Paint;
         }
         public TreeNodeModel<SampleDataModel> GetSampleTree(List<SampleDataModel> data)
         {
